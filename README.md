@@ -22,7 +22,9 @@ docker run --rm -it \
 ``` 
 # Running with xhost
 If Xephyr is not available xhost can be used for sharing host X display for single applications.
+
 _Note: This nice short solution has the disadvantage of breaking container isolation. X security leaks like keylogging and remote host control can be abused by container applications._
+
 * Allow access with xhost for current local user and create a similar container user.
 * Share access to host X server with environment variable DISPLAY and X unix socket in /tmp/.X11-unix.
 * Allow shared memory with --ipc=host to avoid RAM access failures and rendering glitches due to X extension MIT-SHM.
