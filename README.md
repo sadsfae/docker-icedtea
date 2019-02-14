@@ -4,7 +4,7 @@ This pulls a docker firefox image with an older java-1.8.0-openjdk and icedtea-w
 ## Usage
 Build image from Dockerfile
  ```bash
-docker build -t firefox-java .
+sudo docker build -t firefox-java .
 ```
  # Running with Xephyr
  In order to run the container and redirect display to xserver we need to run via Xephyr
@@ -16,8 +16,8 @@ docker build -t firefox-java .
  ```bash
 myscreen=1920x1080
 export Displaynumber=1 &
-Xephyr :$Displaynumber -extension MIT-SHM -extension XTEST -host-cursor -screen $myscreen &
-docker run --rm -it \
+sudo Xephyr :$Displaynumber -extension MIT-SHM -extension XTEST -host-cursor -screen $myscreen &
+sudo docker run --rm -it \
     -e DISPLAY=:$Displaynumber \
     -v /tmp/.X11-unix/:/tmp/.X11-unix/:rw \
     --cap-drop=ALL \
