@@ -1,5 +1,8 @@
- # Usage
- Build image from Dockerfile
+# docker-icedtea
+This pulls a docker firefox image with an older java-1.8.0-openjdk and icedtea-web to work around issues with older hardware OEM vendors out-of-band interfaces.
+
+## Usage
+Build image from Dockerfile
  ```bash
 docker build -t firefox-java .
 ```
@@ -8,10 +11,12 @@ docker build -t firefox-java .
  * Run Xephyr with disabled shared memory (X extension MIT-SHM) and disabled X extension XTEST.
  * Set DISPLAY and share access to new unix socket /tmp/.X11-unix/.
  * Drop all capabilities with --cap-drop=ALL --security-opt=no-new-privileges to improve container security.
+ * Pass the intended screen resolution via the `myscreen` variables
 
  ```bash
+myscreen=1920x1080
 export Displaynumber=1 &
-Xephyr :$Displaynumber -extension MIT-SHM -extension XTEST -host-cursor -screen 1200x800 &
+Xephyr :$Displaynumber -extension MIT-SHM -extension XTEST -host-cursor -screen $myscreen &
 docker run --rm -it \
     -e DISPLAY=:$Displaynumber \
     -v /tmp/.X11-unix/:/tmp/.X11-unix/:rw \
@@ -20,7 +25,7 @@ docker run --rm -it \
     firefox-java
 
 ``` 
-# Running with xhost
+## Running with xhost
 If Xephyr is not available xhost can be used for sharing host X display for single applications.
 
 _Note: This nice short solution has the disadvantage of breaking container isolation. X security leaks like keylogging and remote host control can be abused by container applications._
