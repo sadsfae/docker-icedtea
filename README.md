@@ -43,3 +43,12 @@ docker run --rm -it \
     --cap-drop=ALL \
     firefox-java
 ```
+
+## Older Nvidia Proprietary Driver
+There may be issues with this running on older Nvidia drivers like the `390` series.
+```
+(firefox-esr:1): Gtk-WARNING **: Locale not supported by C library.
+        Using the fallback 'C' locale.
+Unable to init server: Broadway display type not supported: :
+Error: cannot open display: :
+```
